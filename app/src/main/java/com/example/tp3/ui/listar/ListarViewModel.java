@@ -10,8 +10,8 @@ import com.example.tp3.model.Producto;
 
 
 import java.util.ArrayList;
-import java.util.Collections; // Para Collections.sort
-import java.util.Comparator;  // Para el Comparator
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -37,10 +37,10 @@ public class ListarViewModel extends AndroidViewModel {
 
     public void cargarProductos() {
 
-        List<Producto> productosObtenidos = new ArrayList<>(MainActivity.listaProductos); //
+        List<Producto> productosObtenidos = new ArrayList<>(MainActivity.listaProductos);
 
 
-        Collections.sort(productosObtenidos, new Comparator<Producto>() { // Usa 'productosObtenidos'
+        Collections.sort(productosObtenidos, new Comparator<Producto>() {
             @Override
             public int compare(Producto p1, Producto p2) {
                 String desc1 = (p1 != null && p1.getDescripcion() != null) ? p1.getDescripcion() : "";
@@ -48,10 +48,8 @@ public class ListarViewModel extends AndroidViewModel {
                 return desc1.compareToIgnoreCase(desc2);
             }
         });
-        // ---- FIN DE LA LÓGICA DE ORDENAMIENTO ----
 
-        // ESTABLECE LA LISTA (AHORA ORDENADA) EN EL LIVEDATA
-        mListaProductos.setValue(productosObtenidos); // 'productosObtenidos'  ordenada
+        mListaProductos.setValue(productosObtenidos);
         mListaVacia.setValue(productosObtenidos.isEmpty());
     }
 }

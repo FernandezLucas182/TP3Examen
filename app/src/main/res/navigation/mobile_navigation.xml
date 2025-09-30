@@ -20,8 +20,29 @@
         tools:layout="@layout/fragment_listar" />
 
     <fragment
+        android:id="@+id/nav_busqueda"
+        android:name="com.example.tp3.ui.busqueda.BusquedaFragment"
+        android:label="@string/busqueda_de_producto_por_codigo"
+        tools:layout="@layout/fragment_busqueda" >
+        <action
+            android:id="@+id/action_nav_busqueda_to_detalleProductoFragment"
+            app:destination="@id/detalleProductoFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.tp3.ui.salir.SalirFragment"
         android:label="@string/SALIENDO"
         tools:layout="@layout/fragment_salir" />
+    <fragment
+        android:id="@+id/detalleProductoFragment"
+        android:name="com.example.tp3.ui.detalle.DetalleProductoFragment"
+        android:label="Detalle del Producto"
+        tools:layout="@layout/fragment_detalle_producto" >
+        <!-- Argumento para recibir el producto -->
+        <argument
+            android:name="producto_arg"
+            app:argType="com.example.tp3.model.Producto"
+            app:nullable="false" />
+    </fragment>
 </navigation>

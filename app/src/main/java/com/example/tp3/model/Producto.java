@@ -1,11 +1,9 @@
 package com.example.tp3.model;
 
 import androidx.annotation.Nullable;
-
 import java.io.Serializable;
-import java.math.BigDecimal;
 
-public class Producto {
+public class Producto implements Serializable {
     private String codigo;
     private String descripcion;
     private double precio;
@@ -45,20 +43,22 @@ public class Producto {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (!(obj instanceof Producto)){
-            return false;
-        }
-        Producto p = (Producto) obj;
-        if(p.getCodigo().equals(this.codigo)){
-            return true;
-        }
-        return false;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Producto producto = (Producto) obj;
+
+
+        if (codigo != null ? !codigo.equals(producto.codigo) : producto.codigo != null) return false;
+
+
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return codigo.hashCode();
+
+        return (codigo != null ? codigo.hashCode() : 0);
     }
 }
-
-

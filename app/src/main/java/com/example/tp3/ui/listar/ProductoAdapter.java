@@ -1,4 +1,4 @@
-package com.example.tp3.ui.listar; // O el paquete que corresponda
+package com.example.tp3.ui.listar;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tp3.R;
 import com.example.tp3.model.Producto;
 import java.util.List;
-import java.util.Locale; // Para formatear el precio
+import java.util.Locale;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
 
@@ -44,7 +44,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     // Método para actualizar la lista de productos en el adaptador
     public void actualizarProductos(List<Producto> nuevosProductos) {
         this.listaProductos = nuevosProductos;
-        notifyDataSetChanged(); // Notifica al RecyclerView que los datos han cambiado
+        notifyDataSetChanged();
     }
 
 

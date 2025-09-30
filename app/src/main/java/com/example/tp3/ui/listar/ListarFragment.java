@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView; // Para el TextView de lista vacía
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +39,7 @@ public class ListarFragment extends Fragment {
 
 
         binding.rvListaProductos.setLayoutManager(new LinearLayoutManager(getContext()));
-        productoAdapter = new ProductoAdapter(new ArrayList<>()); // Inicializa con lista vacía
+        productoAdapter = new ProductoAdapter(new ArrayList<>());
         binding.rvListaProductos.setAdapter(productoAdapter);
 
         return root;
@@ -52,7 +52,7 @@ public class ListarFragment extends Fragment {
         listarViewModel.getListaProductos().observe(getViewLifecycleOwner(), new Observer<List<Producto>>() {
             @Override
             public void onChanged(List<Producto> productos) {
-                // actualiza el adaptador con la nueva lista
+
                 productoAdapter.actualizarProductos(productos);
             }
         });

@@ -1,31 +1,27 @@
 package com.example.tp3.ui.cargar;
 
-import android.app.Activity;
+
 import android.app.Application;
-import android.os.Bundle;
 import static com.example.tp3.MainActivity.*;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.tp3.MainActivity;
-import com.example.tp3.databinding.FragmentCargarBinding;
+// import com.example.tp3.databinding.FragmentCargarBinding;
 import com.example.tp3.model.Producto;
-
-
 
 public class CargarViewModel extends AndroidViewModel {
 
-    private FragmentCargarBinding binding;
+
     private MutableLiveData<String> mMsj;
 
     public CargarViewModel(@NonNull Application application) {
         super(application);
+
     }
-    //private ArrayList<Producto> productos = MainActivity.listaProductos;
 
     public LiveData<String> getMMensaje(){
         if(mMsj == null) {
@@ -35,48 +31,65 @@ public class CargarViewModel extends AndroidViewModel {
     }
 
     public void cargarProducto(String codigo, String descripcion, String precio){
-
         boolean valido = validar(codigo, descripcion, precio);
 
         if (valido){
-            MainActivity.listaProductos.add(new Producto(codigo, descripcion, Double.parseDouble(precio)));
+
+            MainActivity.listaProductos.add(new Producto(codigo.trim(), descripcion.trim(), Double.parseDouble(precio.trim())));
             mMsj.setValue("Producto creado con éxito");
         }
+        // Si no es válido, el método validar() ya habrá llamado a mMsj.setValue() con el error.
     }
-    private boolean validar(String codigo, String descripcion, String precio){
+
+    private boolean validar(String codigo, String descripcion, String precioStr){
         boolean duplicado = false;
         boolean valido = true;
-        StringBuilder mensaje = new StringBuilder();
+        StringBuilder mensajeBuilder = new StringBuilder();
 
-        try{
-            double p = Double.parseDouble(precio);
 
-            duplicado = listaProductos.contains(new Producto(codigo, descripcion, p));
-        }catch (NumberFormatException e) {
-            mMsj.setValue(("El precio debe contener un numero"));
+        if (codigo == null || codigo.trim().isEmpty()) {
+            mensajeBuilder.append("El código no puede estar vacío.\n");
+            valido = false;
+        }
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            mensajeBuilder.append("La descripción no puede estar vacía.\n");
+            valido = false;
+        }
+        if (precioStr == null || precioStr.trim().isEmpty()) {
+            mensajeBuilder.append("El precio no puede estar vacío.\n");
             valido = false;
         }
 
-        if(duplicado){
-              mensaje.append("Ya existe un producto con el mismo código \n");
-              valido = false;
-              }
-              if (codigo.isBlank()){
-              mensaje.append("el producto debe tener una descripcion");
-              valido = false;
-              }
-              if(codigo.isBlank()){
-                  mensaje.append("el producto debe tener un código");
-                  valido = false;
-              }
-              if (precio.isBlank()){
-                  mensaje.append("el producto debe tener un precio");
-                  valido = false;
-              }
-              mMsj.setValue(mensaje.toString());
-              return  valido;
 
+        if (!valido) {
+            mMsj.setValue(mensajeBuilder.toString().trim());
+            return false;
+        }
+
+        try{
+            double p = Double.parseDouble(precioStr.trim());
+
+
+            Producto productoTempParaDuplicado = new Producto(codigo.trim(), "", 0.0);
+            duplicado = listaProductos.contains(productoTempParaDuplicado);
+
+        } catch (NumberFormatException e) {
+
+            mMsj.setValue("El precio debe ser un número válido.");
+            return false;
+        }
+
+        if(duplicado){
+            mensajeBuilder.append("Ya existe un producto con el mismo código.\n");
+            valido = false;
+        }
+
+
+        if (!valido) {
+            mMsj.setValue(mensajeBuilder.toString().trim());
+        }
+
+
+        return valido;
     }
 }
-
-
