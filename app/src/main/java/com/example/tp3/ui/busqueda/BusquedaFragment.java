@@ -51,7 +51,7 @@ public class BusquedaFragment extends Fragment {
             if (mensaje != null && !mensaje.isEmpty()) {
 
                 Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
-                binding.tvResultadoBusqueda.setText(""); // Limpiar el resultado anterior si lo hubiera
+                binding.tvResultadoBusqueda.setText("");
             }
         });
 
