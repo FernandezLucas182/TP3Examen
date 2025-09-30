@@ -15,4 +15,8 @@
     <string name="salir">Salir</string>
     <string name="cargar_producto">CARGAR PRODUCTO</string>
     <string name="SALIENDO">SALIR</string>
+    <string name="busqueda">Búsqueda de Producto</string>
+    <string name="busqueda_de_producto_por_codigo">BUSQUEDA DE PRODUCTO POR CODIGO</string>
+    <string name="productos">Productos</string>
+    <string name="carga_busqueda_y_listar">Carga, busqueda y listar</string>
 </resources>

@@ -1,8 +1,7 @@
 package com.example.tp3;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
+import android.view.View;import android.view.Menu;
 
 import com.example.tp3.model.Producto;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,10 +44,15 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
+        // ----- INICIO DE LA MODIFICACIÓN -----
+        // Añade R.id.nav_busqueda a la lista de destinos de nivel superior
+        // para que el título de la AppBar y el botón de navegación del drawer funcionen correctamente.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                 R.id.nav_gallery,R.id.nav_home, R.id.nav_slideshow)
+                R.id.nav_gallery, R.id.nav_home, R.id.nav_busqueda, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
+        // ----- FIN DE LA MODIFICACIÓN -----
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
